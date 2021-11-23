@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arharif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 20:07:06 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/10/18 22:55:42 by ncolomer         ###   ########.fr       */
+/*   Created: 2021/11/07 15:10:12 by arharif           #+#    #+#             */
+/*   Updated: 2021/11/07 15:12:24 by arharif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void
-	ft_lstadd_front(t_list **alst, t_list *new)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	if (alst)
+	unsigned int	i;
+
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
 	{
-		if (*alst)
-			new->next = *alst;
-		*alst = new;
+		f(i, &s[i]);
+		i++;
 	}
 }

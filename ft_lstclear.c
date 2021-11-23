@@ -3,26 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arharif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 20:18:49 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/11/12 21:10:31 by ncolomer         ###   ########.fr       */
+/*   Created: 2021/11/21 23:43:32 by arharif           #+#    #+#             */
+/*   Updated: 2021/11/21 23:43:42 by arharif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void
-	ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_list	*tmp;
-
-	if (!del || !lst || !*lst)
-		return ;
-	while (lst && *lst)
+	if (lst)
 	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = tmp;
+		while (*lst)
+		{
+			ft_lstdelone(*lst, del);
+			(*lst) = (*lst)->next;
+		}
+		(*lst) = NULL;
 	}
+	return ;
 }
+/*
+int main()
+{
+	t_list *l;
+	t_list *l1;
+	t_list *l2;
+
+	l = ft_lstnew(ft_strdup("kko "));
+	l1 = ft_lstnew(ft_strdup("zaplo "));
+	l2 = ft_lstnew(ft_strdup("batbat "));
+	l->next = l1;
+	l1->next = l2;
+	l2->next= NULL;
+	ft_lstclear(&l, del);
+	while(l)
+	{
+		printf("%s", l->content);
+		l = l->next;
+	}
+}*/

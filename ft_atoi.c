@@ -3,33 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arharif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 11:17:02 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/10/10 00:31:59 by ncolomer         ###   ########.fr       */
+/*   Created: 2021/11/04 18:49:16 by arharif           #+#    #+#             */
+/*   Updated: 2021/11/14 23:48:01 by arharif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int
-	ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	int	i;
-	int	is_neg;
-	int	res;
+	unsigned int	num;
+	int				i;
+	int				np;
 
-	if (!str)
-		return (0);
+	np = 1;
 	i = 0;
-	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v' ||
-			str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+	num = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\f'
+		|| str[i] == '\r' || str[i] == '\n' || str[i] == '\v')
 		i++;
-	is_neg = (str[i] == '-') ? -1 : 1;
-	if (is_neg == -1 || str[i] == '+')
-		i++;
-	res = 0;
+	if (str[i] == '+' || str[i] == '-')
+		if (str[i++] == '-')
+			np = -1;
 	while (str[i] >= '0' && str[i] <= '9')
-		res = (res * 10) + (str[i++] - '0');
-	return (res * is_neg);
+	{
+		num = num * 10 + (str[i] - '0');
+		i++;
+	}
+	return ((int)(np * num));
 }

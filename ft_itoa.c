@@ -3,59 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arharif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 16:26:33 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/10/14 11:48:50 by ncolomer         ###   ########.fr       */
+/*   Created: 2021/11/07 14:56:17 by arharif           #+#    #+#             */
+/*   Updated: 2021/11/07 17:51:52 by arharif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int
-	ft_abs(int nbr)
+int	len_n(int n)
 {
-	return ((nbr < 0) ? -nbr : nbr);
-}
+	int	i;
 
-static void
-	ft_strrev(char *str)
-{
-	size_t	length;
-	size_t	i;
-	char	tmp;
-
-	length = ft_strlen(str);
-	i = 0;
-	while (i < length / 2)
+	i = 1;
+	if (n < 0)
 	{
-		tmp = str[i];
-		str[i] = str[length - i - 1];
-		str[length - i - 1] = tmp;
+		n = -n;
 		i++;
 	}
+	while (n >= 10)
+	{
+		n = n / 10;
+		i++;
+	}
+	return (i);
 }
 
-char
-	*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-	char	*str;
-	int		is_neg;
-	size_t	length;
+	char	*ptr;
+	int		len;
+	long	nb;
 
-	is_neg = (n < 0);
-	if (!(str = ft_calloc(11 + is_neg, sizeof(*str))))
-		return (NULL);
+	nb = n;
+	if (n == -2147483648)
+		return (ft_strdup ("-2147483648"));
 	if (n == 0)
-		str[0] = '0';
-	length = 0;
-	while (n != 0)
+		return (ft_strdup ("0"));
+	len = len_n(n);
+	ptr = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ptr)
+		return (NULL);
+	ptr[len] = '\0';
+	if (n < 0)
 	{
-		str[length++] = '0' + ft_abs(n % 10);
-		n = (n / 10);
+		n = -n;
+		ptr[0] = '-';
 	}
-	if (is_neg)
-		str[length] = '-';
-	ft_strrev(str);
-	return (str);
+	while (n)
+	{
+		ptr[--len] = n % 10 + 48;
+		n = n / 10;
+	}
+	return (ptr);
 }

@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arharif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 20:09:16 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/10/09 20:47:42 by ncolomer         ###   ########.fr       */
+/*   Created: 2021/11/21 23:39:42 by arharif           #+#    #+#             */
+/*   Updated: 2021/11/21 23:40:28 by arharif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int
-	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-	size_t	i;
+	int	n;
 
-	i = 0;
+	n = 0;
 	while (lst)
 	{
+		n++;
 		lst = lst->next;
-		i++;
 	}
-	return (i);
+	return (n);
 }

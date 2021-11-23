@@ -3,28 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncolomer <ncolomer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arharif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 16:52:31 by ncolomer          #+#    #+#             */
-/*   Updated: 2019/10/10 00:28:52 by ncolomer         ###   ########.fr       */
+/*   Created: 2021/11/07 15:07:01 by arharif           #+#    #+#             */
+/*   Updated: 2021/11/17 01:15:14 by arharif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char
-	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char	*str;
-	size_t	i;
+	int		i;
 
-	if (!(str = ft_strdup(s)))
-		return (NULL);
 	i = 0;
-	while (str[i])
+	if (!s || !f)
+		return (NULL);
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!str)
+		return (NULL);
+	while (s[i])
 	{
-		str[i] = (*f)(i, str[i]);
+		str[i] = f(i, s[i]);
 		i++;
 	}
+	str[i] = '\0';
 	return (str);
 }
+/*char my_func(unsigned int i, char str)
+{
+ 	printf("My inner function: index = %d and %c\n", i, str);
+ 	return str - 32;
+}
+
+int main()
+{
+char str[10] = "anass";
+printf("The result is %s\n", str);
+char *result = ft_strmapi(str, my_func);
+printf("The result is %s\n", result);
+return 0;
+}*/
